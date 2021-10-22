@@ -2108,7 +2108,6 @@ int cam_sensor_core_power_up(struct cam_sensor_power_ctrl_t *ctrl,
 							"vreg %s %d",
 							soc_info->rgltr_name[j],
 							rc);
-						soc_info->rgltr[j] = NULL;
 						goto power_up_failed;
 					}
 
@@ -2208,7 +2207,6 @@ int cam_sensor_core_power_up(struct cam_sensor_power_ctrl_t *ctrl,
 						soc_info->rgltr_name[vreg_idx],
 						rc);
 
-					soc_info->rgltr[vreg_idx] = NULL;
 					goto power_up_failed;
 				}
 
@@ -2598,8 +2596,6 @@ int cam_sensor_util_power_down(struct cam_sensor_power_ctrl_t *ctrl,
 						"Reg: %s disable failed",
 						soc_info->rgltr_name[
 							ps->seq_val]);
-						soc_info->rgltr[ps->seq_val] =
-							NULL;
 						msm_cam_sensor_handle_reg_gpio(
 							pd->seq_type,
 							gpio_num_info,

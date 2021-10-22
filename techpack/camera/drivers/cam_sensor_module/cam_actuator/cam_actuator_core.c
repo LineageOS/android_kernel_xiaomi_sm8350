@@ -910,21 +910,21 @@ int32_t cam_actuator_driver_cmd(struct cam_actuator_ctrl_t *a_ctrl,
 			goto release_mutex;
 		}
 
-		if (a_ctrl->cam_act_state == CAM_ACTUATOR_CONFIG) {
-			rc = cam_actuator_power_down(a_ctrl);
-			if (rc < 0) {
-				CAM_ERR(CAM_ACTUATOR,
-					"Actuator Power down failed");
-				goto release_mutex;
-			}
-		}
-
 		if (a_ctrl->bridge_intf.device_hdl == -1) {
 			CAM_ERR(CAM_ACTUATOR, "link hdl: %d device hdl: %d",
 				a_ctrl->bridge_intf.device_hdl,
 				a_ctrl->bridge_intf.link_hdl);
 			rc = -EINVAL;
 			goto release_mutex;
+		}
+
+		if (a_ctrl->cam_act_state == CAM_ACTUATOR_CONFIG) {
+			rc = cam_actuator_power_down(a_ctrl);
+			if (rc < 0) {
+				CAM_ERR(CAM_ACTUATOR,
+					"Actuator Power Down Failed");
+				goto release_mutex;
+			}
 		}
 
 		if (a_ctrl->bridge_intf.link_hdl != -1) {
