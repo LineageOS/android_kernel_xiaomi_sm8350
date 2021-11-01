@@ -79,11 +79,6 @@ enum uvdm_state {
 	USBPD_UVDM_CONNECT,
 };
 
-enum usb_connector_type {
-	USB_CONNECTOR_TYPE_TYPEC,
-	USB_CONNECTOR_TYPE_MICRO_USB,
-};
-
 enum psy_type {
 	PSY_TYPE_BATTERY,
 	PSY_TYPE_USB,
@@ -141,8 +136,6 @@ enum usb_property_id {
 	USB_TEMP,
 	USB_REAL_TYPE,
 	USB_TYPEC_COMPLIANT,
-	USB_SCOPE,
-	USB_CONNECTOR_TYPE,
 	USB_PROP_MAX,
 };
 
@@ -478,8 +471,6 @@ struct battery_chg_dev {
 	u8				*digest;
 	bool				slave_fg_verify_flag;
 	u32				*ss_auth_data;
-	/* extcon for VBUS/ID notification for USB for micro USB */
-	struct extcon_dev		*extcon;
 	u32				*thermal_levels;
 	const char			*wls_fw_name;
 	int				curr_thermal_level;
@@ -506,8 +497,6 @@ struct battery_chg_dev {
 	u32				usb_icl_ua;
 	u32				reverse_chg_flag;
 	u32				hw_version_build;
-	u32				connector_type;
-	u32				usb_prev_mode;
 	bool				restrict_chg_en;
 	bool				shutdown_delay_en;
 	bool				support_wireless_charge;
