@@ -28,7 +28,6 @@
 #endif
 
 #include "qti_battery_charger.h"
-#include "qti_typec_class.h"
 
 static const int battery_prop_map[BATT_PROP_MAX] = {
 	[BATT_STATUS]		= POWER_SUPPLY_PROP_STATUS,
@@ -507,21 +506,12 @@ static void battery_chg_update_uusb_type(struct battery_chg_dev *bcdev,
 			/* Device mode connect notification */
 			extcon_set_state_sync(bcdev->extcon, EXTCON_USB, 1);
 			bcdev->usb_prev_mode = EXTCON_USB;
-			rc = qti_typec_partner_register(bcdev->typec_class,
-							TYPEC_DEVICE);
-			if (rc < 0)
-				pr_err("Failed to register typec partner rc=%d\n",
-					rc);
 		}
 		break;
 	case POWER_SUPPLY_SCOPE_SYSTEM:
 		/* Host mode connect notification */
 		extcon_set_state_sync(bcdev->extcon, EXTCON_USB_HOST, 1);
 		bcdev->usb_prev_mode = EXTCON_USB_HOST;
-		rc = qti_typec_partner_register(bcdev->typec_class, TYPEC_HOST);
-		if (rc < 0)
-			pr_err("Failed to register typec partner rc=%d\n",
-				rc);
 		break;
 	default:
 		if (bcdev->usb_prev_mode == EXTCON_USB ||
@@ -530,7 +520,6 @@ static void battery_chg_update_uusb_type(struct battery_chg_dev *bcdev,
 			extcon_set_state_sync(bcdev->extcon,
 					      bcdev->usb_prev_mode, 0);
 			bcdev->usb_prev_mode = EXTCON_NONE;
-			qti_typec_partner_unregister(bcdev->typec_class);
 		}
 		break;
 	}
@@ -2298,15 +2287,6 @@ static int battery_chg_probe(struct platform_device *pdev)
 	if (rc < 0)
 		dev_warn(dev, "Failed to register extcon rc=%d\n", rc);
 
-	if (bcdev->connector_type == USB_CONNECTOR_TYPE_MICRO_USB) {
-		bcdev->typec_class = qti_typec_class_init(bcdev->dev);
-		if (IS_ERR_OR_NULL(bcdev->typec_class)) {
-			dev_err(dev, "Failed to init typec class err=%d\n",
-				PTR_ERR(bcdev->typec_class));
-			return PTR_ERR(bcdev->typec_class);
-		}
-	}
-
 	schedule_work(&bcdev->usb_type_work);
 
 	INIT_DELAYED_WORK( &bcdev->xm_prop_change_work, generate_xm_charge_uvent);
@@ -2347,7 +2327,6 @@ static int battery_chg_remove(struct platform_device *pdev)
 	mi_disp_unregister_client(&bcdev->fb_notifier);
 #endif
 	unregister_reboot_notifier(&bcdev->reboot_notifier);
-	qti_typec_class_deinit(bcdev->typec_class);
 	rc = pmic_glink_unregister_client(bcdev->client);
 	if (rc < 0) {
 		pr_err("Error unregistering from pmic_glink, rc=%d\n", rc);
