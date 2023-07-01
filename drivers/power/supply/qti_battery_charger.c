@@ -1115,13 +1115,22 @@ static int battery_psy_get_prop(struct power_supply *psy,
 		pval->strval = pst->model;
 		break;
 	case POWER_SUPPLY_PROP_CAPACITY:
+#if defined(CONFIG_BQ_FUEL_GAUGE)
+		pval->intval = pst->prop[prop_id] / 100;
+#else
 		pval->intval = DIV_ROUND_CLOSEST(pst->prop[prop_id], 100);
+#endif
 		if (IS_ENABLED(CONFIG_QTI_PMIC_GLINK_CLIENT_DEBUG) &&
 		   (bcdev->fake_soc >= 0 && bcdev->fake_soc <= 100))
 			pval->intval = bcdev->fake_soc;
 		break;
 	case POWER_SUPPLY_PROP_TEMP:
+#if defined(CONFIG_BQ_FUEL_GAUGE)
+		pval->intval = pst->prop[prop_id];
+		pval->intval = pval->intval / 10;
+#else
 		pval->intval = DIV_ROUND_CLOSEST((int)pst->prop[prop_id], 10);
+#endif
 		break;
 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT:
 		pval->intval = bcdev->curr_thermal_level;
@@ -1129,9 +1138,11 @@ static int battery_psy_get_prop(struct power_supply *psy,
 	case POWER_SUPPLY_PROP_CHARGE_CONTROL_LIMIT_MAX:
 		pval->intval = bcdev->num_thermal_levels;
 		break;
-	case POWER_SUPPLY_PROP_CHARGE_COUNTER:
-		pval->intval = DIV_ROUND_CLOSEST(pst->prop[prop_id], 100);
-		break;
+#ifndef CONFIG_BQ_FUEL_GAUGE
+        case POWER_SUPPLY_PROP_CHARGE_COUNTER:
+                pval->intval = DIV_ROUND_CLOSEST(pst->prop[prop_id], 100);
+                break;
+#endif
 	default:
 		pval->intval = pst->prop[prop_id];
 		break;
