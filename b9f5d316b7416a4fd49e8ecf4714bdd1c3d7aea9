@@ -16,6 +16,24 @@
       "message": "why?",
       "revId": "b9f5d316b7416a4fd49e8ecf4714bdd1c3d7aea9",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc5e133_a12bba82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2023-07-05T16:58:29Z",
+      "side": 1,
+      "message": "If you use the definitions in different files (qti_battery_charger.c/qti_battery_charger_xiaomi.c), move them to the common file (qti_battery_charger.h).",
+      "parentUuid": "6ee2e5e0_b8a77f76",
+      "revId": "b9f5d316b7416a4fd49e8ecf4714bdd1c3d7aea9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
