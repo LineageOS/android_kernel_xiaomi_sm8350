@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2d0e227_c3d55dde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2023-07-05T16:59:12Z",
+      "side": 1,
+      "message": "tested on redwood (works)",
+      "revId": "bf23bf24dd3afc11a03e22338816c470dc33d62a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
