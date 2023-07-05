@@ -34,6 +34,24 @@
       "parentUuid": "f5a06e78_dc31fbd7",
       "revId": "c7c9189e57ff1ee2e3cd5e25a73c04049dfb6d2a",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a43e603_8e0a5812",
+        "filename": "drivers/power/supply/qti_battery_charger.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2023-07-05T21:49:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a88995d5_1f1f11b1",
+      "revId": "c7c9189e57ff1ee2e3cd5e25a73c04049dfb6d2a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

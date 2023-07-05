@@ -16,6 +16,24 @@
       "message": "Hey, i have reworded the commit message and reduced the code changes to actual changes. Could you verify that this still fixes the issue on your device?",
       "revId": "dd5b5d24648464fddcc517953c435a77a0d10781",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "651c45ef_2f99749b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2023-07-05T21:49:11Z",
+      "side": 1,
+      "message": "i tested, but the capacity and temp read values are wrong. it is better to keep as the original driver says. we avoid long-term problems.",
+      "parentUuid": "a8008805_e62b3e6f",
+      "revId": "dd5b5d24648464fddcc517953c435a77a0d10781",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
