@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8008805_e62b3e6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2023-07-05T07:03:34Z",
+      "side": 1,
+      "message": "Hey, i have reworded the commit message and reduced the code changes to actual changes. Could you verify that this still fixes the issue on your device?",
+      "revId": "dd5b5d24648464fddcc517953c435a77a0d10781",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
