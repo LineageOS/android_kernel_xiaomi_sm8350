@@ -282,6 +282,10 @@ enum xm_property_id {
 	XM_PROP_SERVER_RESULT,
 	XM_PROP_ADSP_RESULT,
 #endif
+#ifdef CONFIG_AI_RSOC
+	XM_PROP_FG1_RSOC,
+	XM_PROP_FG1_AI,
+#endif
 	XM_PROP_MAX,
 };
 enum {
