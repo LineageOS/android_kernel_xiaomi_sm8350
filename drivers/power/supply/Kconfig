@@ -424,6 +424,12 @@ config BQ2597X
 	help
 	  Say Y here to enable BQ2597X charger
 
+config BQ_CLOUD_AUTHENTICATION
+	bool "BQ cloud authentication config"
+	depends on QTI_BATTERY_CHARGER
+	help
+	  Say Y here to enable BQ cloud authentication
+
 config BQ_FG_1S
 	bool "BQ 1S battery cell config"
 	depends on QTI_BATTERY_CHARGER
