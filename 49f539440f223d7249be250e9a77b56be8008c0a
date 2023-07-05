@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62516a0a_125a32dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2023-07-05T16:59:59Z",
+      "side": 1,
+      "message": "tested on redwood (fixed camera)",
+      "revId": "49f539440f223d7249be250e9a77b56be8008c0a",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
