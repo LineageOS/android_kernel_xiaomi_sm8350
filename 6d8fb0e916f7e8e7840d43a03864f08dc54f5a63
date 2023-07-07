@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdfb6c44_604916e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2023-07-07T07:05:13Z",
+      "side": 1,
+      "message": "no, absolutely not. sm7350 and am7325 already use our sm8350-common stuff and there is no reason to split other sm8350 devices.",
+      "revId": "6d8fb0e916f7e8e7840d43a03864f08dc54f5a63",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ],
   "submitRequirementResults": []
 }
