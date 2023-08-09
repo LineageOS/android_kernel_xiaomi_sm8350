@@ -16,6 +16,24 @@
       "message": "This needs more explanation and might need to be conditional",
       "revId": "d1f1eb22c5049993491d297b7cf936c4dc595729",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5156bc30_bedd0b98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32042
+      },
+      "writtenOn": "2023-08-09T14:52:29Z",
+      "side": 1,
+      "message": "mars/star/odin need this to fix \"time until full\"\nThis may have an impact on existing official devices, no one has tested it so far",
+      "parentUuid": "24b42df2_3e99d82f",
+      "revId": "d1f1eb22c5049993491d297b7cf936c4dc595729",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
