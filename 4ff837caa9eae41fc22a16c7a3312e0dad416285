@@ -16,6 +16,23 @@
       "message": "Need to test if this affects other devices",
       "revId": "4ff837caa9eae41fc22a16c7a3312e0dad416285",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc1b0153_9c1010ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2023-08-10T12:12:45Z",
+      "side": 1,
+      "message": "What makes you think the proper value is 30 times the reported value?\n\nWhere does 65535 come from and why do you not want to report higher values?\n\nthat stuff should go into the commit message",
+      "revId": "4ff837caa9eae41fc22a16c7a3312e0dad416285",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
