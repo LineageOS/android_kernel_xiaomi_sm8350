@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f555674_df87bb98",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2023-08-11T08:49:16Z",
+      "side": 1,
+      "message": "in order to convert minutes to seconds you have to multiply by 60, not 30.",
+      "range": {
+        "startLine": 9,
+        "startChar": 163,
+        "endLine": 9,
+        "endChar": 214
+      },
+      "revId": "ef758adb2e462f6905d356542806ce5c3a927db3",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
