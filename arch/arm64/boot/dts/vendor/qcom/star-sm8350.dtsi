@@ -515,9 +515,7 @@ And public attribution of xiaomi platforms(like venus and so and)
 };
 
 &sde_dsi1 {
-	sec-vddio-supply = <&L12C>;
-	sec-vdd-supply = <&display_sec_cvo>;
-	avdd-supply = <&display_sec_vddi>;
+	status = "disabled";
 };
 
 &dsi_prim_sim_vid {
@@ -536,32 +534,6 @@ And public attribution of xiaomi platforms(like venus and so and)
 &splash_memory {
 	reg = <0x0 0xea600000 0x0 0x0119c000>,
 		<0x0 0xeb79c000 0x0 0x0815000>;
-};
-
-&sde_dsi1_active {
-	mux {
-		pins = "gpio30";
-		function = "gpio";
-	};
-
-	config {
-		pins = "gpio30";
-		drive-strength = <8>;   /* 8 mA */
-		bias-disable = <0>;     /* no pull */
-	};
-};
-
-&sde_dsi1_suspend {
-	mux {
-		pins = "gpio30";
-		function = "gpio";
-	};
-
-	config {
-		pins = "gpio30";
-		drive-strength = <2>;   /* 2 mA */
-		bias-pull-down;         /* PULL DOWN */
-	};
 };
 
 &pm8350c_s1 {
@@ -588,7 +560,7 @@ And public attribution of xiaomi platforms(like venus and so and)
 
 &mdss_mdp {
 	connectors = <&smmu_sde_unsec &smmu_sde_sec &sde_wb &sde_dsi
-		&sde_dsi1 &sde_rscc>;
+		&sde_rscc>;
 };
 
 &pm8350b_gpios {
