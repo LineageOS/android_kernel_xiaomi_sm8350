@@ -340,7 +340,10 @@ static int cam_ois_slaveInfo_pkt_parser(struct cam_ois_ctrl_t *o_ctrl,
 			ois_info->slave_addr >> 1;
 		o_ctrl->ois_fw_flag = ois_info->ois_fw_flag;
 		o_ctrl->is_ois_calib = ois_info->is_ois_calib;
-		o_ctrl->is_ois_pre_init = ois_info->is_ois_pre_init; //xiaomi add
+		//xiaomi add begin
+		o_ctrl->is_ois_pre_init = ois_info->is_ois_pre_init;
+		o_ctrl->is_ois_post_init = ois_info->is_ois_post_init;
+		//xiaomi add end
 		memcpy(o_ctrl->ois_name, ois_info->ois_name, OIS_NAME_LEN);
 		o_ctrl->ois_name[OIS_NAME_LEN - 1] = '\0';
 		o_ctrl->io_master_info.cci_client->retries = 3;
@@ -368,7 +371,7 @@ static int cam_default_ois_fw_download(struct cam_ois_ctrl_t *o_ctrl)
 {
 	uint16_t                           total_bytes = 0;
 	uint8_t                           *ptr = NULL;
-	int32_t                            rc = 0, cnt, i;
+	int32_t                            rc = 0, cnt, i, j;
 	uint32_t                           fw_size;
 	const struct firmware             *fw = NULL;
 	const char                        *fw_name_prog = NULL;
@@ -403,7 +406,7 @@ static int cam_default_ois_fw_download(struct cam_ois_ctrl_t *o_ctrl)
 	}
 
 	total_bytes = fw->size;
-	i2c_reg_setting.addr_type = CAMERA_SENSOR_I2C_TYPE_BYTE;
+	i2c_reg_setting.addr_type = o_ctrl->opcode.fw_addr_type;
 	i2c_reg_setting.data_type = CAMERA_SENSOR_I2C_TYPE_BYTE;
 	i2c_reg_setting.size = total_bytes;
 	i2c_reg_setting.delay = 0;
@@ -419,16 +422,20 @@ static int cam_default_ois_fw_download(struct cam_ois_ctrl_t *o_ctrl)
 	i2c_reg_setting.reg_setting = (struct cam_sensor_i2c_reg_array *) (
 		vaddr);
 
-	for (i = 0, ptr = (uint8_t *)fw->data; i < total_bytes;) {
+	for (i = 0, ptr = (uint8_t *)fw->data, j = 0; i < total_bytes;) {
 		for (cnt = 0; cnt < OIS_TRANS_SIZE && i < total_bytes;
 			cnt++, ptr++, i++) {
 			i2c_reg_setting.reg_setting[cnt].reg_addr =
-				o_ctrl->opcode.prog;
+				o_ctrl->opcode.prog + j * OIS_TRANS_SIZE;
 			i2c_reg_setting.reg_setting[cnt].reg_data = *ptr;
 			i2c_reg_setting.reg_setting[cnt].delay = 0;
 			i2c_reg_setting.reg_setting[cnt].data_mask = 0;
 		}
 		i2c_reg_setting.size = cnt;
+
+		if (o_ctrl->opcode.is_addr_increase) {
+			j++;
+		}
 
 		rc = camera_io_dev_write_continuous(&(o_ctrl->io_master_info),
 			&i2c_reg_setting, 1);
@@ -450,7 +457,7 @@ static int cam_default_ois_fw_download(struct cam_ois_ctrl_t *o_ctrl)
 	}
 
 	total_bytes = fw->size;
-	i2c_reg_setting.addr_type = CAMERA_SENSOR_I2C_TYPE_BYTE;
+	i2c_reg_setting.addr_type = o_ctrl->opcode.fw_addr_type;
 	i2c_reg_setting.data_type = CAMERA_SENSOR_I2C_TYPE_BYTE;
 	i2c_reg_setting.size = total_bytes;
 	i2c_reg_setting.delay = 0;
@@ -466,16 +473,20 @@ static int cam_default_ois_fw_download(struct cam_ois_ctrl_t *o_ctrl)
 	i2c_reg_setting.reg_setting = (struct cam_sensor_i2c_reg_array *) (
 		vaddr);
 
-	for (i = 0, ptr = (uint8_t *)fw->data; i < total_bytes;) {
+	for (i = 0, ptr = (uint8_t *)fw->data, j = 0; i < total_bytes;) {
 		for (cnt = 0; cnt < OIS_TRANS_SIZE && i < total_bytes;
 			cnt++, ptr++, i++) {
 			i2c_reg_setting.reg_setting[cnt].reg_addr =
-				o_ctrl->opcode.coeff;
+				o_ctrl->opcode.coeff + j * OIS_TRANS_SIZE;
 			i2c_reg_setting.reg_setting[cnt].reg_data = *ptr;
 			i2c_reg_setting.reg_setting[cnt].delay = 0;
 			i2c_reg_setting.reg_setting[cnt].data_mask = 0;
 		}
 		i2c_reg_setting.size = cnt;
+
+		if (o_ctrl->opcode.is_addr_increase) {
+			j++;
+		}
 
 		rc = camera_io_dev_write_continuous(&(o_ctrl->io_master_info),
 			&i2c_reg_setting, 1);
@@ -493,12 +504,12 @@ static int cam_default_ois_fw_download(struct cam_ois_ctrl_t *o_ctrl)
 	/* Load MEM, this step is not necessary for every ois, so skip load if not exist*/
 	rc = request_firmware(&fw, fw_name_mem, dev);
 	if (rc) {
-		CAM_ERR(CAM_OIS, "Skip to locate %s", fw_name_mem);
+		CAM_DBG(CAM_OIS, "Skip to locate %s", fw_name_mem);
 		return 0;
 	}
 
 	total_bytes = fw->size;
-	i2c_reg_setting.addr_type = CAMERA_SENSOR_I2C_TYPE_BYTE;
+	i2c_reg_setting.addr_type = o_ctrl->opcode.fw_addr_type;
 	i2c_reg_setting.data_type = CAMERA_SENSOR_I2C_TYPE_BYTE;
 	i2c_reg_setting.size = total_bytes;
 	i2c_reg_setting.delay = 0;
@@ -514,16 +525,20 @@ static int cam_default_ois_fw_download(struct cam_ois_ctrl_t *o_ctrl)
 	i2c_reg_setting.reg_setting = (struct cam_sensor_i2c_reg_array *) (
 		vaddr);
 
-	for (i = 0, ptr = (uint8_t *)fw->data; i < total_bytes;) {
+	for (i = 0, ptr = (uint8_t *)fw->data, j = 0; i < total_bytes;) {
 		for (cnt = 0; cnt < OIS_TRANS_SIZE && i < total_bytes;
 			cnt++, ptr++, i++) {
 			i2c_reg_setting.reg_setting[cnt].reg_addr =
-				o_ctrl->opcode.memory;
+				o_ctrl->opcode.memory + j * OIS_TRANS_SIZE;
 			i2c_reg_setting.reg_setting[cnt].reg_data = *ptr;
 			i2c_reg_setting.reg_setting[cnt].delay = 0;
 			i2c_reg_setting.reg_setting[cnt].data_mask = 0;
 		}
 		i2c_reg_setting.size = cnt;
+
+		if (o_ctrl->opcode.is_addr_increase) {
+			j++;
+		}
 
 		rc = camera_io_dev_write_continuous(&(o_ctrl->io_master_info),
 			&i2c_reg_setting, 1);
@@ -922,7 +937,9 @@ static int cam_ois_pkt_parse(struct cam_ois_ctrl_t *o_ctrl, void *arg)
 						"Calib parsing failed: %d", rc);
 					return rc;
 				}
-			} else if ((o_ctrl->is_ois_pre_init != 0) && //xiaomi add begin
+			}
+			//xiaomi add begin
+			else if ((o_ctrl->is_ois_pre_init != 0) &&
 				(o_ctrl->i2c_pre_init_data.is_settings_valid ==
 				0)) {
 				CAM_DBG(CAM_OIS,
@@ -939,7 +956,25 @@ static int cam_ois_pkt_parse(struct cam_ois_ctrl_t *o_ctrl, void *arg)
 						"pre init settings parsing failed: %d", rc);
 					return rc;
 				}
-			} //xiaomi add end
+			}else if ((o_ctrl->is_ois_post_init != 0) &&
+				(o_ctrl->i2c_post_init_data.is_settings_valid ==
+				0)) {
+				CAM_DBG(CAM_OIS,
+					"Received post init settings");
+				i2c_reg_settings = &(o_ctrl->i2c_post_init_data);
+				i2c_reg_settings->is_settings_valid = 1;
+				i2c_reg_settings->request_id = 0;
+				rc = cam_sensor_i2c_command_parser(
+					&o_ctrl->io_master_info,
+					i2c_reg_settings,
+					&cmd_desc[i], 1, NULL);
+				if (rc < 0) {
+					CAM_ERR(CAM_OIS,
+						"post init settings parsing failed: %d", rc);
+					return rc;
+				}
+			}
+			//xiaomi add end
 			break;
 			}
 		}
@@ -962,7 +997,8 @@ static int cam_ois_pkt_parse(struct cam_ois_ctrl_t *o_ctrl, void *arg)
 				CAM_ERR(CAM_OIS, "Cannot apply pre init data");
 				goto pwr_dwn;
 			}
-		} //xiaomi add end
+		}
+		//xiaomi add end
 
 		if (o_ctrl->ois_fw_flag) {
 			rc = cam_ois_fw_download(o_ctrl);
@@ -997,14 +1033,31 @@ static int cam_ois_pkt_parse(struct cam_ois_ctrl_t *o_ctrl, void *arg)
 			}
 		}
 
+		//xiaomi add begin
+		if (o_ctrl->is_ois_post_init) {
+			CAM_DBG(CAM_OIS, "apply post init settings");
+			rc = cam_ois_apply_settings(o_ctrl,
+				&o_ctrl->i2c_post_init_data);
+			if (rc) {
+				CAM_ERR(CAM_OIS, "Cannot apply post init data");
+				goto pwr_dwn;
+			}
+		}
 
-		// xiaomi add begin
 		rc = delete_request(&o_ctrl->i2c_pre_init_data);
 		if (rc < 0) {
 			CAM_WARN(CAM_OIS,
 				"Fail deleting Pre Init data: rc: %d", rc);
 			rc = 0;
-		} //xiaomi add end
+		}
+
+		rc = delete_request(&o_ctrl->i2c_post_init_data);
+		if (rc < 0) {
+			CAM_WARN(CAM_OIS,
+				"Fail deleting Post Init data: rc: %d", rc);
+			rc = 0;
+		}
+		//xiaomi add end
 
 		rc = delete_request(&o_ctrl->i2c_init_data);
 		if (rc < 0) {
@@ -1217,9 +1270,13 @@ void cam_ois_shutdown(struct cam_ois_ctrl_t *o_ctrl)
 	if (o_ctrl->i2c_init_data.is_settings_valid == 1)
 		delete_request(&o_ctrl->i2c_init_data);
 
-	// xiaomi add
+	// xiaomi add begin
 	if (o_ctrl->i2c_pre_init_data.is_settings_valid == 1)
 		delete_request(&o_ctrl->i2c_pre_init_data);
+
+	if (o_ctrl->i2c_post_init_data.is_settings_valid == 1)
+		delete_request(&o_ctrl->i2c_post_init_data);
+	// xiaomi add end
 
 	kfree(power_info->power_setting);
 	kfree(power_info->power_down_setting);
@@ -1348,9 +1405,13 @@ int cam_ois_driver_cmd(struct cam_ois_ctrl_t *o_ctrl, void *arg)
 		if (o_ctrl->i2c_init_data.is_settings_valid == 1)
 			delete_request(&o_ctrl->i2c_init_data);
 
-		// xiaomi add
+		// xiaomi add begin
 		if (o_ctrl->i2c_pre_init_data.is_settings_valid == 1)
 			delete_request(&o_ctrl->i2c_pre_init_data);
+
+		if (o_ctrl->i2c_post_init_data.is_settings_valid == 1)
+			delete_request(&o_ctrl->i2c_post_init_data);
+		// xiaomi add end
 
 		break;
 	case CAM_STOP_DEV:
@@ -1361,6 +1422,9 @@ int cam_ois_driver_cmd(struct cam_ois_ctrl_t *o_ctrl, void *arg)
 			o_ctrl->cam_ois_state);
 		}
 		o_ctrl->cam_ois_state = CAM_OIS_CONFIG;
+		break;
+	case CAM_FLUSH_REQ:
+		// ignore the flush cmd
 		break;
 	default:
 		CAM_ERR(CAM_OIS, "invalid opcode");
