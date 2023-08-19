@@ -16,6 +16,24 @@
       "message": "Instead of removing all these lines i\u0027d prefer just adding this instead:\n/delete-node/ timing@2;",
       "revId": "4b5f30dffe32f3714c6a490cbc7b93c75c05ee77",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbcbadcd_d60faded",
+        "filename": "arch/arm64/boot/dts/vendor/qcom/display/lahaina-sde-display.dtsi",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 32042
+      },
+      "writtenOn": "2023-08-19T09:15:23Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ce705277_15f13bdf",
+      "revId": "4b5f30dffe32f3714c6a490cbc7b93c75c05ee77",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
