@@ -22,6 +22,30 @@
       },
       "revId": "4e938d7bd2498b4efd5272c9f703a0bd327f6162",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1beef232_6454ad5c",
+        "filename": "arch/arm64/boot/dts/vendor/qcom/display/lahaina-sde-display.dtsi",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 32042
+      },
+      "writtenOn": "2023-08-19T09:43:54Z",
+      "side": 1,
+      "message": "Thanks for the reminder, sorry I didn\u0027t notice that k11 is sorted differently than k2",
+      "parentUuid": "7c3ebdcd_6e451f58",
+      "range": {
+        "startLine": 367,
+        "startChar": 0,
+        "endLine": 367,
+        "endChar": 2
+      },
+      "revId": "4e938d7bd2498b4efd5272c9f703a0bd327f6162",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
