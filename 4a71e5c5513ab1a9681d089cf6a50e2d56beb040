@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab1887c_9f431a61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32042
+      },
+      "writtenOn": "2023-08-19T10:34:40Z",
+      "side": 1,
+      "message": "Also remove 90Hz timings for k8(odin)",
+      "revId": "4a71e5c5513ab1a9681d089cf6a50e2d56beb040",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
