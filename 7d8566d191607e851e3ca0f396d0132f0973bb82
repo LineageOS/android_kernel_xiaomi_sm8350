@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "486daa3e_8d5e9eb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 28423
+      },
+      "writtenOn": "2023-08-28T12:41:35Z",
+      "side": 1,
+      "message": "Fixes Main camera (CamX not loading logical cameras)",
+      "revId": "7d8566d191607e851e3ca0f396d0132f0973bb82",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
