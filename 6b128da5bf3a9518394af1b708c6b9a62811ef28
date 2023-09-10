@@ -16,6 +16,24 @@
       "message": "Why?",
       "revId": "6b128da5bf3a9518394af1b708c6b9a62811ef28",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f14e18a_f85baec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32042
+      },
+      "writtenOn": "2023-09-10T19:53:29Z",
+      "side": 1,
+      "message": "Enabling it without perfect back screen handling will cause desktop and system crashes. Just putting the commit here will not merge it",
+      "parentUuid": "9f2b3ba4_4fa495c1",
+      "revId": "6b128da5bf3a9518394af1b708c6b9a62811ef28",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
