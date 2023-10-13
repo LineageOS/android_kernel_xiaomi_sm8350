@@ -31,7 +31,7 @@
 #include <linux/power_supply.h>
 #include <linux/pm_qos.h>
 #include "aw_haptic.h"
-#include  "ringbuffer.h"
+#include "ringbuffer.h"
 #include "aw_config.h"
 #include "aw8697.h"
 
@@ -152,6 +152,7 @@ static const unsigned char aw8697_reg_access[AW8697_REG_MAX] = {
 	[AW8697_REG_NUM_F0_2] = REG_RD_ACCESS | REG_WR_ACCESS,
 	[AW8697_REG_NUM_F0_3] = REG_RD_ACCESS | REG_WR_ACCESS,
 };
+
 /******************************************************
  *
  * functions
@@ -160,6 +161,7 @@ static const unsigned char aw8697_reg_access[AW8697_REG_MAX] = {
 static void aw8697_interrupt_clear(struct aw8697 *aw8697);
 static int aw8697_haptic_trig_enable_config(struct aw8697 *aw8697);
 static int aw8697_haptic_get_vbat(struct aw8697 *aw8697);
+
  /******************************************************
  *
  * aw8697 i2c write/read
@@ -177,9 +179,9 @@ static int aw8697_i2c_write(struct aw8697 *aw8697,
 		if (ret < 0) {
 			aw_err("%s: i2c_write cnt=%d error=%d\n", __func__, cnt,
 			       ret);
-		} else {
+		} else
 			break;
-		}
+
 		cnt++;
 		msleep(AW_I2C_RETRY_DELAY);
 	}
@@ -254,13 +256,13 @@ int aw8697_i2c_reads(struct aw8697 *aw8697, unsigned char reg_addr,
 			.flags = 0,
 			.len = sizeof(uint8_t),
 			.buf = &reg_addr,
-			},
+		},
 		[1] = {
 			.addr = aw8697->i2c->addr,
 			.flags = I2C_M_RD,
 			.len = len,
 			.buf = buf,
-			},
+		},
 	};
 
 	ret = i2c_transfer(aw8697->i2c->adapter, msg, ARRAY_SIZE(msg));
@@ -274,6 +276,7 @@ int aw8697_i2c_reads(struct aw8697 *aw8697, unsigned char reg_addr,
 
 	return ret;
 }
+
 /*****************************************************
  *
  * ram update
@@ -283,8 +286,6 @@ static void aw8697_rtp_loaded(const struct firmware *cont, void *context)
 {
 	struct aw8697 *aw8697 = context;
 
-	aw_info("%s enter\n", __func__);
-
 	if (!cont) {
 		aw_err("%s: failed to read %s\n", __func__,
 		       awinic_rtp_name[aw8697->rtp_file_num]);
@@ -292,7 +293,7 @@ static void aw8697_rtp_loaded(const struct firmware *cont, void *context)
 		return;
 	}
 
-	aw_info("%s: loaded %s - size: %zu\n", __func__,
+	aw_dbg("%s: loaded %s - size: %zu\n", __func__,
 		awinic_rtp_name[aw8697->rtp_file_num], cont ? cont->size : 0);
 
 	/* aw8697 rtp update */
@@ -303,7 +304,8 @@ static void aw8697_rtp_loaded(const struct firmware *cont, void *context)
 		return;
 	}
 	aw8697_rtp->len = cont->size;
-	aw_info("%s: rtp size = %d\n", __func__, aw8697_rtp->len);
+	aw_dbg("%s: rtp size = %d\n", __func__, aw8697_rtp->len);
+
 	memcpy(aw8697_rtp->data, cont->data, cont->size);
 	release_firmware(cont);
 
@@ -313,8 +315,6 @@ static void aw8697_rtp_loaded(const struct firmware *cont, void *context)
 
 static int aw8697_rtp_update(struct aw8697 *aw8697)
 {
-	aw_info("%s enter\n", __func__);
-
 	return request_firmware_nowait(THIS_MODULE, FW_ACTION_HOTPLUG,
 				       awinic_rtp_name[aw8697->rtp_file_num],
 				       aw8697->dev, GFP_KERNEL, aw8697,
@@ -339,6 +339,7 @@ static int aw8697_check_ram_data(struct aw8697 *aw8697,
 	return 0;
 }
 #endif
+
 static void aw8697_container_update(struct aw8697 *aw8697,
 				    struct aw8697_container *aw8697_cont)
 {
@@ -366,8 +367,9 @@ static void aw8697_container_update(struct aw8697 *aw8697,
 	shift = aw8697->ram.baseaddr_shift;
 	aw8697->ram.base_addr =
 	    (unsigned int)((aw8697_cont->data[0 + shift] << 8) |
-			   (aw8697_cont->data[1 + shift]));
-	aw_info("%s: base_addr=0x%4x\n", __func__, aw8697->ram.base_addr);
+			(aw8697_cont->data[1 + shift]));
+
+	aw_dbg("%s: base_addr=0x%4x\n", __func__, aw8697->ram.base_addr);
 
 	aw8697_i2c_write(aw8697, AW8697_REG_BASE_ADDRH,
 			 aw8697_cont->data[0 + shift]);
@@ -401,10 +403,12 @@ static void aw8697_container_update(struct aw8697 *aw8697,
 			len = aw8697_cont->len - i;
 		else
 			len = AW_RAMDATA_WR_BUFFER_SIZE;
+
 		aw8697_i2c_writes(aw8697, AW8697_REG_RAMDATA,
-					  &aw8697_cont->data[i],len);
-			i += len;
-		}
+			&aw8697_cont->data[i],len);
+		i += len;
+	}
+
 #ifdef AW_CHECK_RAM_DATA
 	shift = aw8697->ram.baseaddr_shift;
 	aw8697_i2c_write(aw8697, AW8697_REG_RAMADDRH,
