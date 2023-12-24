@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65218eeb_fd26d7ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32253
+      },
+      "writtenOn": "2023-12-24T17:14:47Z",
+      "side": 1,
+      "message": "i\u0027d prefer splitting the commit instead of a huge squash",
+      "revId": "83c23b7f33f4cd3a4318cd63790f1eb78725aad9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
