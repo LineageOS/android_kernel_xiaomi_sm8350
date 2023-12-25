@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8099095_cf718fc4",
+        "filename": "drivers/power/supply/qti_battery_charger.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2023-12-25T11:54:11Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 2
+      },
+      "revId": "1dec6584480dee4cee978b0024ae5a655bd0ea6b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
