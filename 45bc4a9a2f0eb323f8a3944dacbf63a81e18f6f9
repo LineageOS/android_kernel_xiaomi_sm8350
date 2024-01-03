@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4056436_3dbb0001",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2024-01-03T19:04:58Z",
+      "side": 1,
+      "message": "this should also be verified on a device not using these commands.\nI can get to it next week.",
+      "revId": "45bc4a9a2f0eb323f8a3944dacbf63a81e18f6f9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77aaece_8a0925f8",
+        "filename": "techpack/display/msm/dsi/dsi_display.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 8525,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2024-01-03T19:04:58Z",
+      "side": 1,
+      "message": "switch",
+      "range": {
+        "startLine": 8525,
+        "startChar": 21,
+        "endLine": 8525,
+        "endChar": 26
+      },
+      "revId": "45bc4a9a2f0eb323f8a3944dacbf63a81e18f6f9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
