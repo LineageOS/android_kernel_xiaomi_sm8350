@@ -70,6 +70,30 @@
       },
       "revId": "1dec6584480dee4cee978b0024ae5a655bd0ea6b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf2de49c_d3dd4424",
+        "filename": "drivers/power/supply/qti_battery_charger.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2024-01-03T19:01:02Z",
+      "side": 1,
+      "message": "including these files changes how fast the device charges but it compiled in both cases just fine? That sounds pretty odd, do you have any idea why that could be the case?",
+      "parentUuid": "3320fd8f_fb7fbe7d",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 2
+      },
+      "revId": "1dec6584480dee4cee978b0024ae5a655bd0ea6b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }

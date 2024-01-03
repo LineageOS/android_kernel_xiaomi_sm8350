@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "babc8c66_b97a1d6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2024-01-03T19:01:02Z",
+      "side": 1,
+      "message": "i\u0027d like to generalize the ifdefs if possible, as stated below. Giovanni: you know some more stuff about this?",
+      "revId": "5e52c8d6a74692f21a670fedfdb5189dbdf6c6db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87291c00_f05fb110",
+        "filename": "drivers/power/supply/qti_battery_charger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2024-01-03T19:01:02Z",
+      "side": 1,
+      "message": "i wonder if that is rather BQ_CLOUD_AUTHENTICATION specific? Can we find out of other devices enabling this also need it?",
+      "range": {
+        "startLine": 214,
+        "startChar": 12,
+        "endLine": 214,
+        "endChar": 36
+      },
+      "revId": "5e52c8d6a74692f21a670fedfdb5189dbdf6c6db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf65ebe0_024ab212",
+        "filename": "drivers/power/supply/qti_battery_charger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2024-01-03T19:01:02Z",
+      "side": 1,
+      "message": "same here, is that all just redwood specifci? I\u0027d imagine it is related to something like BQ_FG_1S instead.",
+      "range": {
+        "startLine": 307,
+        "startChar": 12,
+        "endLine": 307,
+        "endChar": 36
+      },
+      "revId": "5e52c8d6a74692f21a670fedfdb5189dbdf6c6db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
