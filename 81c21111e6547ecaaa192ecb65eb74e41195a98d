@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3cd73e3_b947e224",
+        "filename": "drivers/input/fingerprint/goodix_tee/gf_spi.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2024-01-03T19:02:53Z",
+      "side": 1,
+      "message": "any reason to not use SUPPORT_NAV_EVENT here? are these gestures different?",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "81c21111e6547ecaaa192ecb65eb74e41195a98d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
