@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba5b09f_c7606333",
+        "filename": "techpack/display/msm/dsi/dsi_panel.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5047,
+      "author": {
+        "id": 29080
+      },
+      "writtenOn": "2024-01-04T08:10:56Z",
+      "side": 1,
+      "message": "maybe use a switch statement here?",
+      "range": {
+        "startLine": 5042,
+        "startChar": 1,
+        "endLine": 5047,
+        "endChar": 64
+      },
+      "revId": "f3aefda5a0749d20df7154e636b4b85a47b8b714",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d59bf281_16dc65b1",
+        "filename": "techpack/display/msm/dsi/dsi_panel.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5050,
+      "author": {
+        "id": 29080
+      },
+      "writtenOn": "2024-01-04T08:10:56Z",
+      "side": 1,
+      "message": "it\u0027s better to move this out of the mutex",
+      "range": {
+        "startLine": 5050,
+        "startChar": 2,
+        "endLine": 5050,
+        "endChar": 9
+      },
+      "revId": "f3aefda5a0749d20df7154e636b4b85a47b8b714",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bb83910_78d910c9",
+        "filename": "techpack/display/msm/sde/sde_encoder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4306,
+      "author": {
+        "id": 29080
+      },
+      "writtenOn": "2024-01-04T08:10:56Z",
+      "side": 1,
+      "message": "container_of never returns NULL",
+      "range": {
+        "startLine": 4306,
+        "startChar": 2,
+        "endLine": 4306,
+        "endChar": 15
+      },
+      "revId": "f3aefda5a0749d20df7154e636b4b85a47b8b714",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
