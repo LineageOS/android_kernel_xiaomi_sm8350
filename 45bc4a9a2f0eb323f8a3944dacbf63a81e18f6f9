@@ -39,6 +39,30 @@
       },
       "revId": "45bc4a9a2f0eb323f8a3944dacbf63a81e18f6f9",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65e88b74_38b8cc11",
+        "filename": "techpack/display/msm/dsi/dsi_display.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 8525,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2024-01-04T01:07:30Z",
+      "side": 1,
+      "message": "fixed 😄",
+      "parentUuid": "c77aaece_8a0925f8",
+      "range": {
+        "startLine": 8525,
+        "startChar": 21,
+        "endLine": 8525,
+        "endChar": 26
+      },
+      "revId": "45bc4a9a2f0eb323f8a3944dacbf63a81e18f6f9",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
