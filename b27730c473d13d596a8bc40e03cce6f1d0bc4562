@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd180cf6_42c03ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2024-01-07T20:04:27Z",
+      "side": 1,
+      "message": "This only works on redwood panels, so let\u0027s make it only for them to use.",
+      "revId": "b27730c473d13d596a8bc40e03cce6f1d0bc4562",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
