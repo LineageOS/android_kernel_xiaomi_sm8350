@@ -22,6 +22,30 @@
       },
       "revId": "81c21111e6547ecaaa192ecb65eb74e41195a98d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dd533c_26467a17",
+        "filename": "drivers/input/fingerprint/goodix_tee/gf_spi.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2024-01-07T19:00:52Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "a3cd73e3_b947e224",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "81c21111e6547ecaaa192ecb65eb74e41195a98d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
