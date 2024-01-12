@@ -46,6 +46,30 @@
       },
       "revId": "81c21111e6547ecaaa192ecb65eb74e41195a98d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca94cd3a_20b3d02f",
+        "filename": "drivers/input/fingerprint/goodix_tee/gf_spi.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 21290
+      },
+      "writtenOn": "2024-01-12T20:20:43Z",
+      "side": 1,
+      "message": "You still introduce a new flag (SUPPORT_NAV_GESTURE) - since you also disable SUPPORT_NAV_EVENT, can\u0027t you just use this to exlude the new stuff?\n\nIf not, would be cool to document how they differ and why it could make sense to have just one enabled.",
+      "parentUuid": "f1dd533c_26467a17",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "81c21111e6547ecaaa192ecb65eb74e41195a98d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
