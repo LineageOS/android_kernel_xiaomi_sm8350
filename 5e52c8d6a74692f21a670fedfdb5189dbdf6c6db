@@ -41,6 +41,30 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53fd4210_9079a1ff",
+        "filename": "drivers/power/supply/qti_battery_charger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2024-01-20T18:08:50Z",
+      "side": 1,
+      "message": "Yes, this is unique to redwood. No devices use the same settings",
+      "parentUuid": "87291c00_f05fb110",
+      "range": {
+        "startLine": 214,
+        "startChar": 12,
+        "endLine": 214,
+        "endChar": 36
+      },
+      "revId": "5e52c8d6a74692f21a670fedfdb5189dbdf6c6db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf65ebe0_024ab212",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-03T19:01:02Z",
       "side": 1,
       "message": "same here, is that all just redwood specifci? I\u0027d imagine it is related to something like BQ_FG_1S instead.",
+      "range": {
+        "startLine": 307,
+        "startChar": 12,
+        "endLine": 307,
+        "endChar": 36
+      },
+      "revId": "5e52c8d6a74692f21a670fedfdb5189dbdf6c6db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "307e65c7_422a17b0",
+        "filename": "drivers/power/supply/qti_battery_charger.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 19841
+      },
+      "writtenOn": "2024-01-20T18:08:50Z",
+      "side": 1,
+      "message": "Of course, exactly the same thing happens here. It\u0027s redwood only configuration.",
+      "parentUuid": "cf65ebe0_024ab212",
       "range": {
         "startLine": 307,
         "startChar": 12,
