@@ -175,6 +175,7 @@ void release_all_touches(struct fts_ts_info *info)
 	}
 	input_sync(info->input_dev);
 	input_report_key(info->input_dev, BTN_INFO, 0);
+	update_fod_press_status(0);
 	input_sync(info->input_dev);
 #ifdef CONFIG_FTS_BOOST
 	lpm_disable_for_dev(false, EVENT_INPUT);
@@ -3941,6 +3942,7 @@ static void fts_enter_pointer_event_handler(struct fts_ts_info *info,
 			info->fod_y = 0;
 			info->fod_coordinate_update = false;
 			info->fod_down = false;
+			update_fod_press_status(0);
 			logError(1, "%s  %s :  FOD Release :%d\n", tag, __func__, touchId);
 			__clear_bit(touchId, &info->sleep_finger);
 		}
@@ -4060,6 +4062,7 @@ static void fts_leave_pointer_event_handler(struct fts_ts_info *info,
 #endif
 
 		info->fod_pressed = false;
+		update_fod_press_status(0);
 		input_report_key(info->input_dev, BTN_INFO, 0);
 
 #ifdef FTS_XIAOMI_TOUCHFEATURE
@@ -4443,6 +4446,7 @@ static void fts_gesture_event_handler(struct fts_ts_info *info,
 			if (!info->fod_down) {
 				logError(1, "%s %s Fod Down\n", tag, __func__);
 				info->fod_down = true;
+				update_fod_press_status(1);
 			}
 			touch_area = (event[9] << 8) | (event[8]);
 			fod_overlap = (event[11] << 8) | (event[10]);
