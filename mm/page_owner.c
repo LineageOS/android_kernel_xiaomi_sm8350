@@ -941,7 +941,7 @@ static ssize_t page_owner_call_site_write(struct file *file,
 	if (!call_site)
 		return -ENOMEM;
 
-	strlcpy(call_site->name, buf, strlen(buf));
+	strlcpy(call_site->name, buf, strlen(call_site->name));
 	mutex_lock(&accounted_call_site_lock);
 	list_add_tail(&call_site->list, &accounted_call_site_list);
 	mutex_unlock(&accounted_call_site_lock);

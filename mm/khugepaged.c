@@ -918,8 +918,6 @@ static bool __collapse_huge_page_swapin(struct mm_struct *mm,
 		.flags = FAULT_FLAG_ALLOW_RETRY,
 		.pmd = pmd,
 		.pgoff = linear_page_index(vma, address),
-		.vma_flags = vma->vm_flags,
-		.vma_page_prot = vma->vm_page_prot,
 	};
 
 	/* we only decide to swapin, if there is enough young ptes */
@@ -1043,7 +1041,6 @@ static void collapse_huge_page(struct mm_struct *mm,
 	if (mm_find_pmd(mm, address) != pmd)
 		goto out;
 
-	vm_write_begin(vma);
 	anon_vma_lock_write(vma->anon_vma);
 
 	mmu_notifier_range_init(&range, MMU_NOTIFY_CLEAR, 0, NULL, mm,
@@ -1081,7 +1078,6 @@ static void collapse_huge_page(struct mm_struct *mm,
 		pmd_populate(mm, pmd, pmd_pgtable(_pmd));
 		spin_unlock(pmd_ptl);
 		anon_vma_unlock_write(vma->anon_vma);
-		vm_write_end(vma);
 		result = SCAN_FAIL;
 		goto out;
 	}
@@ -1117,7 +1113,6 @@ static void collapse_huge_page(struct mm_struct *mm,
 	set_pmd_at(mm, address, pmd, _pmd);
 	update_mmu_cache_pmd(vma, address, pmd);
 	spin_unlock(pmd_ptl);
-	vm_write_end(vma);
 
 	*hpage = NULL;
 
@@ -1345,8 +1340,6 @@ void collapse_pte_mapped_thp(struct mm_struct *mm, unsigned long addr)
 	if (!pmd)
 		goto drop_hpage;
 
-	vm_write_begin(vma);
-
 	/*
 	 * We need to lock the mapping so that from here on, only GUP-fast and
 	 * hardware page walks can access the parts of the page tables that
@@ -1414,7 +1407,6 @@ void collapse_pte_mapped_thp(struct mm_struct *mm, unsigned long addr)
 				haddr + HPAGE_PMD_SIZE);
 	mmu_notifier_invalidate_range_start(&range);
 	_pmd = pmdp_collapse_flush(vma, haddr, pmd);
-	vm_write_end(vma);
 	mm_dec_nr_ptes(mm);
 	tlb_remove_table_sync_one();
 	mmu_notifier_invalidate_range_end(&range);
@@ -1431,7 +1423,6 @@ drop_hpage:
 
 abort:
 	pte_unmap_unlock(start_pte, ptl);
-	vm_write_end(vma);
 	i_mmap_unlock_write(vma->vm_file->f_mapping);
 	goto drop_hpage;
 }
@@ -1512,10 +1503,8 @@ static void retract_page_tables(struct address_space *mapping, pgoff_t pgoff)
 							NULL, mm, addr,
 							addr + HPAGE_PMD_SIZE);
 				mmu_notifier_invalidate_range_start(&range);
-				vm_write_begin(vma);
 				/* assume page table is clear */
 				_pmd = pmdp_collapse_flush(vma, addr, pmd);
-				vm_write_end(vma);
 				mm_dec_nr_ptes(mm);
 				tlb_remove_table_sync_one();
 				pte_free(mm, pmd_pgtable(_pmd));

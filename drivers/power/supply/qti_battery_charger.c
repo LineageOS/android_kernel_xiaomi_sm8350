@@ -1874,13 +1874,13 @@ static ssize_t charging_enabled_store(struct class *c,
 	if (val) {
 		/*
 		 * Enable charging, i.e. set the restricted current back to
-		 * its default value and unset the restriction boolean flag.
+		 * the thermal limit and unset the restriction boolean flag.
 		 */
 		rc = __battery_psy_set_charge_current(bcdev,
-				DEFAULT_RESTRICT_FCC_UA);
+				bcdev->thermal_fcc_ua);
 		if (rc < 0)
 			return rc;
-		bcdev->restrict_fcc_ua = DEFAULT_RESTRICT_FCC_UA;
+		bcdev->restrict_fcc_ua = bcdev->thermal_fcc_ua;
 		bcdev->restrict_chg_en = 0;
 	} else {
 		/*

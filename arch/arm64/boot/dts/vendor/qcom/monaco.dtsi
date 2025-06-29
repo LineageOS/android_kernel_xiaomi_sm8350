@@ -886,7 +886,7 @@
 		clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>, <&gcc GPLL0>;
 		clock-names = "xo", "alternate";
 		qcom,no-accumulative-counter;
-		qcom,max-lut-entries = <12>;
+		qcom,lut-max-entries = <12>;
 		#freq-domain-cells = <2>;
 	};
 

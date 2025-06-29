@@ -3189,6 +3189,7 @@ static int mhi_dev_alloc_evt_buf_evt_req(struct mhi_dev *mhi,
 {
 	int rc;
 	uint32_t size, i;
+	struct event_req *req, *tmp;
 
 	size = mhi_dev_get_evt_ring_size(mhi, ch->ch_id);
 
@@ -3207,7 +3208,14 @@ static int mhi_dev_alloc_evt_buf_evt_req(struct mhi_dev *mhi,
 	 * they were allocated with a different size
 	 */
 	if (ch->evt_buf_size) {
-		kfree(ch->ereqs);
+		list_for_each_entry_safe(req, tmp, &ch->event_req_buffers, list) {
+			list_del(&req->list);
+			kfree(req);
+		}
+		list_for_each_entry_safe(req, tmp, &ch->flush_event_req_buffers, list) {
+			list_del(&req->list);
+			kfree(req);
+		}
 		kfree(ch->tr_events);
 	}
 	/*
@@ -3221,14 +3229,8 @@ static int mhi_dev_alloc_evt_buf_evt_req(struct mhi_dev *mhi,
 	mhi_log(MHI_MSG_INFO,
 		"ch_id:%d evt buf size is %d\n", ch->ch_id, ch->evt_buf_size);
 
-	/* Allocate event requests */
-	ch->ereqs = kcalloc(ch->evt_req_size, sizeof(*ch->ereqs), GFP_KERNEL);
-	if (!ch->ereqs) {
-		mhi_log(MHI_MSG_ERROR,
-			"Failed to alloc ereqs for ch_id:%d\n", ch->ch_id);
-		rc = -ENOMEM;
-		goto free_ereqs;
-	}
+	INIT_LIST_HEAD(&ch->event_req_buffers);
+	INIT_LIST_HEAD(&ch->flush_event_req_buffers);
 
 	/* Allocate buffers to queue transfer completion events */
 	ch->tr_events = kcalloc(ch->evt_buf_size, sizeof(*ch->tr_events),
@@ -3241,11 +3243,13 @@ static int mhi_dev_alloc_evt_buf_evt_req(struct mhi_dev *mhi,
 		goto free_ereqs;
 	}
 
-	/* Organize event flush requests into a linked list */
-	INIT_LIST_HEAD(&ch->event_req_buffers);
-	INIT_LIST_HEAD(&ch->flush_event_req_buffers);
-	for (i = 0; i < ch->evt_req_size; ++i)
-		list_add_tail(&ch->ereqs[i].list, &ch->event_req_buffers);
+	/* Allocate event requests */
+	for (i = 0; i < ch->evt_req_size; ++i) {
+		req = kzalloc(sizeof(struct event_req), GFP_KERNEL);
+		if (!req)
+			goto free_ereqs;
+		list_add_tail(&req->list, &ch->event_req_buffers);
+	}
 
 	ch->curr_ereq =
 		container_of(ch->event_req_buffers.next,
@@ -3263,8 +3267,13 @@ static int mhi_dev_alloc_evt_buf_evt_req(struct mhi_dev *mhi,
 	return 0;
 
 free_ereqs:
-	kfree(ch->ereqs);
-	ch->ereqs = NULL;
+	if (!list_empty(&ch->event_req_buffers)) {
+		list_for_each_entry_safe(req, tmp, &ch->event_req_buffers, list) {
+			list_del(&req->list);
+			kfree(req);
+		}
+	}
+	kfree(ch->tr_events);
 	ch->evt_buf_size = 0;
 	ch->evt_req_size = 0;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * Copyright (c) 2014-2021, The Linux Foundation. All rights reserved.
  * Copyright (C) 2013 Red Hat
  * Author: Rob Clark <robdclark@gmail.com>
@@ -1434,10 +1434,17 @@ static int _sde_encoder_update_rsc_client(
 void sde_encoder_irq_control(struct drm_encoder *drm_enc, bool enable)
 {
 	struct sde_encoder_virt *sde_enc;
+	struct sde_kms *sde_kms = NULL;
 	int i;
 
 	if (!drm_enc) {
 		SDE_ERROR("invalid encoder\n");
+		return;
+	}
+
+	sde_kms = sde_encoder_get_kms(drm_enc);
+	if (!sde_kms) {
+		SDE_ERROR("invalid kms\n");
 		return;
 	}
 
@@ -1450,7 +1457,7 @@ void sde_encoder_irq_control(struct drm_encoder *drm_enc, bool enable)
 		if (phys && phys->ops.irq_control)
 			phys->ops.irq_control(phys, enable);
 	}
-	sde_kms_cpu_vote_for_irq(sde_encoder_get_kms(drm_enc), enable);
+	sde_kms_cpu_vote_for_irq(sde_kms, enable);
 
 }
 

@@ -1443,6 +1443,12 @@ static int fastrpc_mmap_create(struct fastrpc_file *fl, int fd,
 				goto bail;
 		}
 	} else if (mflags == FASTRPC_DMAHANDLE_NOMAP) {
+		if (map->attr & FASTRPC_ATTR_KEEP_MAP) {
+			ADSPRPC_ERR("Invalid attribute 0x%x for fd %d\n",
+				map->attr, fd);
+			err = -EINVAL;
+			goto bail;
+		}
 		VERIFY(err, !IS_ERR_OR_NULL(map->buf = dma_buf_get(fd)));
 		if (err) {
 			ADSPRPC_ERR("dma_buf_get failed for fd %d ret %ld\n",
